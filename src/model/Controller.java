@@ -5,36 +5,58 @@ public class Controller {
     private Pillar[] pillars;
 
     public Controller() {
-
         pillars = new Pillar[4];
+        initializePillars();
+    }
 
+    private void initializePillars() {
+        pillars[0] = new Pillar("Biodiversidad");
+        pillars[1] = new Pillar("Agua");
+        pillars[2] = new Pillar("Tratamiento de Basuras");
+        pillars[3] = new Pillar("Energía");
     }
 
     /**
-     * Descripcion: Permite crear y añadir un Project en un Pillar en el sistema
+     * Descripcion: Agrega un nuevo proyecto a un pilar específico
      * 
-     * @return boolean true si se logra añadir el Prject en el Pillar, false en caso
-     *         contrario
+     * @param pilarPosicion Posición del pilar (0 a 3)
+     * @param id            ID del proyecto
+     * @param name          Nombre del proyecto
+     * @param description   Descripción del proyecto
+     * @param status        Estado del proyecto (activo o inactivo)
+     * @return boolean true si se agrega el proyecto, false en caso contrario
      */
-    public boolean registerProjectInPillar(int pillarType, String id, String name, String description,boolean status) {
-
-        return false;
+    public boolean addProjectToPillar(int pilarPosicion, String id, String name, String description, boolean status) {
+        if (pilarPosicion >= 0 && pilarPosicion < pillars.length) {
+            Project newProject = new Project(id, name, description, status);
+            return pillars[pilarPosicion].registerProject(newProject);
+        }
+        return false; // Pilar no válido
     }
 
     /**
-     * Descripcion: Calcula el valor en dinero correspondiente al arrendamiento
-     * mensual de todos los Edificios
-     * pre: El arreglo edificios debe estar inicializado
+     * Descripcion: Consulta los proyectos en un pilar específico
      * 
-     * @return String cadena en formato lista con la información de los
-     * Project registrados en el Pillar
+     * @param pilarPosicion Posición del pilar (0 a 3)
+     * @return String lista con la información de los proyectos en el pilar
      */
-    public String queryProjectsByPillar(int pillarType) {
-
-        String query = "";
-
-        return query;
-
+    public String listProjectsInPillar(int pilarPosicion) {
+        if (pilarPosicion >= 0 && pilarPosicion < pillars.length) {
+            return pillars[pilarPosicion].getProjectList();
+        }
+        return "Pilar no encontrado."; // Pilar no válido
     }
 
+    /**
+     * Descripcion: Obtiene el nombre de un pilar específico
+     * 
+     * @param pilarPosicion Posición del pilar (0 a 3)
+     * @return String nombre del pilar o mensaje de error
+     */
+    public String getPillarName(int pilarPosicion) {
+        if (pilarPosicion >= 0 && pilarPosicion < pillars.length) {
+            return pillars[pilarPosicion].getName();
+        }
+        return "Pilar no encontrado.";
+    }
 }

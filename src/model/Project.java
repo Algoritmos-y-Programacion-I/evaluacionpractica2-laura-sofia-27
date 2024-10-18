@@ -15,5 +15,48 @@ public class Project {
         this.status=status;
 
     }
+    
+        public String getName() {
+            return name;
+        }
+    
+        public void setName(String name) {
+            this.name = name;
+        }
+    
+        public String getId() {
+            return id;
+        }
+    
+        public void setId(String id) {
+            this.id = id;
+        }
+    
+        public boolean getStatus() {
+            return status;
+        }
+    
+        public void setStatus(boolean status) {
+            this.status = status;
+        }
 
-}
+        public String getDescription(){
+            return description;
+
+        }
+
+        public void setDescription(String description){
+            this.description= description;
+        }
+    
+        @Override
+        public String toString() {
+            return "Nombre: " + name + ", ID: " + id + ", Estado: " + (status ? "Activo" : "Inactivo");
+        }
+    }
+    
+    
+    
+
+
+    
